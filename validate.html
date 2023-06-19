@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>GiftKarte - Validation API</title>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    </head>
+    <body>
+        <form id="giftcard_form" action="#" method="post">
+            <h2 class="title">E-Gift Card Validation</h2>
+            <table>
+                <tr>
+                    <th>Endpoint</th>
+                    <td>
+                        <select class="select endpoint" name="endpoint" required>
+                            <option value="">Select Endpoint</option>
+                            <option value="custom_live">GiftKarte - Custom - Live</option>
+                            <option value="shopify_live">GiftKarte - Shopify - Live</option>
+                            <option value="custom_staging">Cloudways - Custom - Staging</option>
+                            <option value="shopify_staging">Cloudways - Shopify - Staging</option>
+                        </select>
+                    </td>
+                </tr>
+                    <tr>
+                    <th>Vendor Access Key</th>
+                    <td>
+                        <select class="select" name="access_key" required>
+                            <option value="c4cf65386dabab4847cb2a0ff5133f87">Test Access Key</option>
+                            <option value="0d839022bff86ff69f188050a9603cc2" >Khas Store</option>
+                            <option value="a33c2ed63afe6a1f6a2a18358afc1206" >Cambridge</option>
+                            <option value="24465c063ce8327b458e66ce2571e66c" selected>Zeen</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>E-Gift Card#</th>
+                    <td><input class="textbox" type="text" name="e_giftcard" value="GK-79483026XLZB-6204" placeholder="Enter E-Gift Card (GK-12345678ABCD-1234)" required></td>
+                </tr>
+                <tr>
+                    <th>Cart Amount(PKR)</th>
+                    <td><input class="textbox" type="number" name="cart_amount" value="10" placeholder="Enter Cart Amount (10)" required></td>
+                </tr>
+                <tr>
+                    <th colspan="2"><button class="button" type="submit" value="submit">Validate E-Gift Card</button></th>
+                </tr>
+                <tr>
+                    <th colspan="2"><button class="reset" type="button">Reset</button></th>
+                </tr>
+            </table>
+        </form>
+        <p class="response"></p>
+
+    <style>
+        body {
+            width: 50%;
+            margin: 0 auto;
+            font-size: 24px;            
+        }
+        table {
+            width: 100%;
+        }
+        th {
+            width: 35%;
+            text-align: left;
+        }
+        td {
+            width: 50%;
+        }
+        form {
+            text-align: center;
+        }
+        .select {
+            width: 104%;
+            padding: 7px;
+            margin-top: 7px;
+            font-size: 15px;
+        }
+        .textbox {
+            width: 100%;
+            padding: 7px;
+            margin-top: 7px;
+            font-size: 15px;
+        }
+        .button {
+            width: 100%;
+            padding: 7px;
+            margin: 30px 10px;
+            font-size: 20px;
+        }
+        p strong {
+            color: blue;
+            text-decoration: underline;
+            letter-spacing: 1px;
+            font-size: 20px;            
+        }
+        .response {
+            font-size: 18px;
+            color: forestgreen;
+        }
+        .response_pre {
+            border-bottom: 1px solid forestgreen;
+            padding-bottom: 10px;
+        }
+    </style>
+    </body>
+    <script type="text/javascript">
+        $('.endpoint').change(function () {
+            endpoint = $('.endpoint').val();
+            if(endpoint == "custom_live") {
+                $('.title').html("E-Gift Card Validation API - Custom Live");
+                $('#giftcard_form').attr("action", "https://giftkarte.com/vendor/api/validate");
+            }            
+
+            if(endpoint == "shopify_live") {
+                $('.title').html("E-Gift Card Validation API - Shopify Live");
+                $('#giftcard_form').attr("action", "https://giftkarte.com/vendor/api/shopify/validate");
+            }            
+
+            if(endpoint == "custom_staging") {
+                $('.title').html("E-Gift Card Validation API - Custom Staging");
+                $('#giftcard_form').attr("action", "https://staging.zeddevelopers.com/vendor/api/validate");
+            }            
+
+            if(endpoint == "shopify_staging") {
+                $('.title').html("E-Gift Card Validation API - Shopify Staging");
+                $('#giftcard_form').attr("action", "https://staging.zeddevelopers.com/vendor/api/shopify/validate");
+            }            
+		});
+
+        $('.reset').click(function () {
+            $(".response").html("");
+		});
+
+        var form = $('#giftcard_form');
+        form.submit(function (e) {
+            e.preventDefault();
+            var form = $('#giftcard_form');
+            var requestData = {
+                type: form.attr('method'),
+                url: form.attr('action')
+            };
+
+            var data = form.serialize();
+            var form_data = data.split('&').map(function(item) {
+                var pair = item.split('=');
+                var obj = {};
+                obj[pair[0]] = pair[1];
+    
+                return obj;
+            });
+            requestData.form_data = form_data;
+
+            $.ajax({
+                type: form.attr('method'),
+                url: form.attr('action'),
+                data: form.serialize(),
+
+                success: function (data) {
+                    $(".response").html("<strong>Form Data:</strong>&nbsp&nbsp<pre class='response_pre'>"+JSON.stringify(requestData, undefined, 3)+"</pre>");
+                    console.log(requestData);
+
+                    $(".response").prepend("<strong>Validation API Response:</strong>&nbsp&nbsp<pre class='response_pre'>"+JSON.stringify(data,undefined, 3)+"</pre>");
+                    console.log('Submission was successful.');
+                    console.log(data);
+                },
+                error: function (data) {
+                    $(".response").prepend("<strong>Error:</strong>&nbsp&nbsp<pre class='response_pre'>"+JSON.stringify(data,undefined, 3)+"</pre>");
+                    console.log('An error occurred.');
+                    console.log(data);
+                },
+            });
+        });
+    </script>
+</html>
