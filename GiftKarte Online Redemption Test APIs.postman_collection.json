@@ -1,0 +1,321 @@
+{
+	"info": {
+		"_postman_id": "17495f11-6a27-473a-bc0c-4ffc6bba328d",
+		"name": "GiftKarte Online Redemption Test APIs",
+		"description": "Welcome to GiftKarte API for Online Redemption of our E-Gift Cards.\n\nOur API allows you to integrate your website to our platform, giving customers the ability to redeem our **E-Gift Cards** to use our website for payment.\n\nWe use a RESTful endpoint with an API Key which is used to authorize the API. Responses are returned as JSON.\n\n**Note: Each vendor will receive a specific Access Key from GiftKarte.**",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20671950"
+	},
+	"item": [
+		{
+			"name": "E-Gift Card Validation",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "access_key",
+							"value": "c4cf65386dabab4847cb2a0ff5133f87",
+							"description": "Unique Vendor Access Key",
+							"type": "text"
+						},
+						{
+							"key": "e_giftcard",
+							"value": "GK-12345678ABCD-1234",
+							"description": "E-Gift Card Format: GK-Gift Card Number-Security Code",
+							"type": "text"
+						},
+						{
+							"key": "cart_amount",
+							"value": "1000",
+							"description": "Customer Cart Amount",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://www.giftkarte.com/vendor/api/validate",
+					"protocol": "https",
+					"host": [
+						"www",
+						"giftkarte",
+						"com"
+					],
+					"path": [
+						"vendor",
+						"api",
+						"validate"
+					]
+				},
+				"description": "The E-Gift Card Validation API allows you to get E-Gift Card detail.\n\n1.  If the entered E-Gift Card is correct & valid format, then you'll receive a successful response.\n2.  If the entered E-Gift Card is incorrect/invalid format then you'll receive a unsuccessful response.\n    \n\n**Response Status & Messages**\n\n**True** - E-Gift Card successfully applied\n\n**False** - You have entered an invalid E-Gift Card details"
+			},
+			"response": [
+				{
+					"name": "Successful Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "access_key",
+									"value": "c4cf65386dabab4847cb2a0ff5133f87",
+									"description": "Unique Vendor Access Key",
+									"type": "text"
+								},
+								{
+									"key": "e_giftcard",
+									"value": "GK-12345678ABCD-1234",
+									"description": "E-Gift Card Format: GK-Gift Card Number-Security Code",
+									"type": "text"
+								},
+								{
+									"key": "cart_amount",
+									"value": "500",
+									"description": "Customer Cart Amount",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://www.giftkarte.com/vendor/api/validate",
+							"protocol": "https",
+							"host": [
+								"www",
+								"giftkarte",
+								"com"
+							],
+							"path": [
+								"vendor",
+								"api",
+								"validate"
+							]
+						}
+					},
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": "{\r\n    \"status\": true,\r\n    \"e_giftcard_amount\": 500,\r\n    \"message\": \"E-Gift Card successfully applied\"\r\n}"
+				},
+				{
+					"name": "Unsuccessful Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "access_key",
+									"value": "c4cf65386dabab4847cb2a0ff5133f87",
+									"description": "Unique Vendor Access Key",
+									"type": "text"
+								},
+								{
+									"key": "e_giftcard",
+									"value": "GK-12345678ABCD-1234",
+									"description": "E-Gift Card Format: GK-Gift Card Number-Security Code",
+									"type": "text"
+								},
+								{
+									"key": "cart_amount",
+									"value": "500",
+									"description": "Customer Cart Amount",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://www.giftkarte.com/vendor/api/validate",
+							"protocol": "https",
+							"host": [
+								"www",
+								"giftkarte",
+								"com"
+							],
+							"path": [
+								"vendor",
+								"api",
+								"validate"
+							]
+						}
+					},
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": "{\r\n    \"status\": false,\r\n    \"e_giftcard_amount\": null,\r\n    \"message\": \"You have entered an invalid E-Gift Card details\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "E-Gift Card Redeem",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "access_key",
+							"value": "c4cf65386dabab4847cb2a0ff5133f87",
+							"description": "Unique Vendor Access Key",
+							"type": "text"
+						},
+						{
+							"key": "e_giftcard",
+							"value": "GK-12345678ABCD-1234",
+							"description": "E-Gift Card Format: GK-Gift Card Number-Security Code",
+							"type": "text"
+						},
+						{
+							"key": "cart_amount",
+							"value": "1000",
+							"description": "Customer Cart Amount",
+							"type": "text"
+						},
+						{
+							"key": "order_number",
+							"value": "TEST-TX012345",
+							"description": "Customer Order Number",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://www.giftkarte.com/vendor/api/redeem",
+					"protocol": "https",
+					"host": [
+						"www",
+						"giftkarte",
+						"com"
+					],
+					"path": [
+						"vendor",
+						"api",
+						"redeem"
+					]
+				},
+				"description": "The E-Gift Card Redemption API allows you to redeem Gift Card.\n\n1.  If the entered E-Gift Card, receiver's phone number is correct & valid format, then you'll receive a successful response.\n2.  If the entered E-Gift Card, receiver's phone number is incorrect & invalid, then you'll receive a unsuccessful response.\n    \n\n**Response Status & Messages**\n\n**True** - E-Gift Card successfully redeem\n\n**False** - You have entered an invalid E-Gift Card details"
+			},
+			"response": [
+				{
+					"name": "Successful Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "access_key",
+									"value": "c4cf65386dabab4847cb2a0ff5133f87",
+									"description": "Unique Vendor Access Key",
+									"type": "text"
+								},
+								{
+									"key": "e_giftcard",
+									"value": "GK-12345678ABCD-1234",
+									"description": "E-Gift Card Format: GK-Gift Card Number-Security Code",
+									"type": "text"
+								},
+								{
+									"key": "cart_amount",
+									"value": "500",
+									"description": "Customer Cart Amount",
+									"type": "text"
+								},
+								{
+									"key": "order_number",
+									"value": "1234ABCD",
+									"description": "Customer Order Number",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://www.giftkarte.com/vendor/api/redeem",
+							"protocol": "https",
+							"host": [
+								"www",
+								"giftkarte",
+								"com"
+							],
+							"path": [
+								"vendor",
+								"api",
+								"redeem"
+							]
+						}
+					},
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": "{\r\n    \"status\": true,\r\n    \"txn\": \"ABCD1234\",\r\n    \"e_giftcard_amount\": 500,\r\n    \"redeemed_amount\": 500,\r\n    \"message\": \"E-Gift Card successfully redeemed\"\r\n}"
+				},
+				{
+					"name": "Unsuccessful Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "access_key",
+									"value": "c4cf65386dabab4847cb2a0ff5133f87",
+									"description": "Unique Vendor Access Key",
+									"type": "text"
+								},
+								{
+									"key": "e_giftcard",
+									"value": "GK-12345678ABCD-1234",
+									"description": "E-Gift Card Format: GK-Gift Card Number-Security Code",
+									"type": "text"
+								},
+								{
+									"key": "cart_amount",
+									"value": "500",
+									"description": "Customer Cart Amount",
+									"type": "text"
+								},
+								{
+									"key": "order_number",
+									"value": "1234ABCD",
+									"description": "Customer Order Number",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://www.giftkarte.com/vendor/api/redeem",
+							"protocol": "https",
+							"host": [
+								"www",
+								"giftkarte",
+								"com"
+							],
+							"path": [
+								"vendor",
+								"api",
+								"redeem"
+							]
+						}
+					},
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": "{\r\n    \"status\": false,\r\n    \"txn\": null,\r\n    \"e_giftcard_amount\": null,\r\n    \"redeemed_amount\": null,\r\n    \"message\": \"You have entered an invalid E-Gift Card details\"\r\n}"
+				}
+			]
+		}
+	]
+}

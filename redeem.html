@@ -16,8 +16,6 @@
                             <option value="">Select Endpoint</option>
                             <option value="custom_live">GiftKarte - Custom - Live</option>
                             <option value="shopify_live">GiftKarte - Shopify - Live</option>
-                            <option value="custom_staging">Cloudways - Custom - Staging</option>
-                            <option value="shopify_staging">Cloudways - Shopify - Staging</option>
                         </select>
                     </td>
                 </tr>
@@ -25,16 +23,15 @@
                     <th>Vendor Access Key</th>
                     <td>
                         <select class="select" name="access_key" required>
+                            <option value="">Select Access Key</option>
                             <option value="c4cf65386dabab4847cb2a0ff5133f87">Test Access Key</option>
-                            <option value="0d839022bff86ff69f188050a9603cc2" >Khas Store</option>
-                            <option value="a33c2ed63afe6a1f6a2a18358afc1206" >Cambridge</option>
-                            <option value="24465c063ce8327b458e66ce2571e66c" selected>Zeen</option>
+                            <option value="18e717c779ecfb954663c9c6024c5d6a" >GK-Development Store</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <th>E-Gift Card#</th>
-                    <td><input class="textbox" type="text" name="e_giftcard" value="GK-79483026XLZB-6204" placeholder="Enter E-Gift Card (GK-12345678ABCD-1234)" required></td>
+                    <td><input class="textbox" type="text" name="e_giftcard" value="GK-12345678ABCD-1234" placeholder="Enter E-Gift Card (GK-12345678ABCD-1234)" required></td>
                 </tr>
                 <tr>
                     <th>Cart Amount(PKR)</th>
@@ -119,17 +116,7 @@
             if(endpoint == "shopify_live") {
                 $('.title').html("E-Gift Card Redemption API - Shopify Live");
                 $('#giftcard_form').attr("action", "https://giftkarte.com/vendor/api/shopify/redeem");
-            }            
-
-            if(endpoint == "custom_staging") {
-                $('.title').html("E-Gift Card Redemption API - Custom Staging");
-                $('#giftcard_form').attr("action", "https://staging.zeddevelopers.com/vendor/api/redeem");
-            }            
-
-            if(endpoint == "shopify_staging") {
-                $('.title').html("E-Gift Card Redemption API - Shopify Staging");
-                $('#giftcard_form').attr("action", "https://staging.zeddevelopers.com/vendor/api/shopify/redeem");
-            }            
+            }
 		});
 
         $('.reset').click(function () {
