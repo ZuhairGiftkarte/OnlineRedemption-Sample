@@ -1,0 +1,3 @@
+Please use below authentication token with AUTH2.0:
+
+cihl2jdavr3ky9ru44aqatbx6uvzu7bq
